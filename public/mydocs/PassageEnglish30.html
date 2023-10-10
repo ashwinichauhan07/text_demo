@@ -1,0 +1,1247 @@
+ 
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" type="text/css" href="key.css">
+    <link rel="stylesheet" type="text/css" href="alert.css">
+     
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <style>
+         body { 
+  background-color:#b8b894;; 
+  color: black; 
+  text-align: center; 
+
+} 
+.container { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+} 
+  
+.heading { 
+  margin-bottom: 5px; 
+  font-size: 1.5rem; 
+  color: #E8E8E8; 
+  background-color:  #404040;
+  width: 60%;
+  margin-left: 8.5em;
+  height: 30px;
+} 
+  
+.header { 
+  display: flex; 
+  align-items: center; 
+} 
+  
+ .errors, .accuracy, 
+.cpm, .wpm,.nwpm ,.timer{ 
+  background-color: #d6f5f5; 
+  height: 30px; 
+  width: 70px;  
+  margin: 8px; 
+  padding: 11px; 
+
+  border-radius: 10px; 
+  box-shadow: black 5px 8px 5px; 
+   font-weight: 500;
+   border: solid 1px;
+} 
+  /*.timer
+  {
+     background-color: #b3d9ff;
+     color: #b3d9ff; 
+  }*/
+.cpm, .wpm ,.nwpm ,.errors, .accuracy,.add{ 
+  display: none; 
+} 
+  
+.header_text { 
+  text-transform: uppercase; 
+  font-size: 0.6rem; 
+  font-weight: 600; 
+} 
+  
+.curr_time, .curr_errors, 
+.curr_accuracy, .curr_cpm, 
+.curr_wpm,.curr_nwpm  { 
+  font-size: 1.5rem; 
+} 
+  
+.quote { 
+  border: solid 1px;
+  background-color: #ffffe6; 
+  font-size: 20px;
+  margin: 10px; 
+  font-family: "Times New Roman", Times, serif;
+  padding: 25px; 
+  width:500px;
+  height: 300px;
+  box-shadow: black 5px 8px 5px; 
+   overflow: scroll;
+} 
+  
+.input_area { 
+  background-color: #ffffe6; 
+  height: 350px; 
+  width: 45%; 
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+  /*font-weight: 600; */
+  margin: 10px; 
+  padding: 20px; 
+  border: 0px; 
+  box-shadow: black 5px 8px 5px; 
+  overflow: scroll;
+  border: solid 1px;
+} 
+.textbox
+{
+  display: flex; 
+}
+.btn
+{
+  padding: 10px;
+}
+ .button
+{
+  text-align: center;
+  background-color: #47d147; 
+  height: 55px; 
+  width: 100px; 
+  margin: 8px; 
+  padding: 6px; 
+  border-radius: 20%;
+  font-size: 0.9rem; 
+  font-weight: 550;
+  box-shadow: black 5px 8px 5px; 
+  border: solid 1px;
+}
+.restart_btn { 
+  text-align: right;
+  /*display: none; */
+  /*background-color:  #ff9933; */
+  /*font-size: 1rem; */
+  padding-right: 14px; 
+  border: solid 1px; 
+  /*box-shadow: black 5px 8px 5px; */
+} 
+  
+.incorrect_char { 
+  color: red; 
+  text-decoration: underline; 
+} 
+  
+.correct_char { 
+  color: darkgreen; 
+} 
+.row3
+        {
+          
+          margin-left: 70px;
+          margin-top: 2rem;
+          display: inline-block;
+          background-color: #061C2B;
+          height: 280px;
+          width: 12%; 
+        }
+
+      .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid;
+  width: 65%;
+  height: 65%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  /*text-align: right;*/
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  /*text-align: left;*/
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+#circle {
+      width: 15px;
+      height: 15px;
+      background: red;
+      border-radius: 50%
+    }
+    #circle1 {
+      width: 25px;
+      height: 25px;
+      background: green;
+      border-radius: 50%
+    }
+    #circle2 {
+      width: 25px;
+      height: 25px;
+      background: yellow;
+      border-radius: 50%
+    }     
+       </style>
+       <style>
+         
+.keyboard {
+    
+    background-color:silver;
+    width: 48%; height: 32%;  
+    border: solid 2px; 
+    margin-right: 200px; 
+    margin-top: 10px;
+    padding-bottom:8px; 
+    padding-right: 2px;
+
+}
+
+
+.keyboard__row {
+    display: inline-block;
+    height: 2.5em;
+    margin: 0.1em;
+}
+
+.keyboard__row--h1 {
+    height: 1em;
+    line-height: 1em;
+}
+
+.keyboard__row--h3 {
+    height: 2.5em;
+}
+
+.keyboard__row > * {
+    position: relative;
+    background: #FFFFF0;
+    text-align: center;
+    color: black;
+    float: left;
+    border-radius: 0.3em;
+    margin: 0.1em;
+    padding: 0em;
+    width: 3em;
+    height: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    -webkit-user-select: none;
+    border: 1px solid #444;
+    box-shadow: 0 0.2em 0 0.05em #222;
+    border-bottom-color: #555;
+}
+
+.keyboard__row--h1 > div {
+    width: 3em;
+}
+
+.keyboard__row > div[data-pressed],
+.keyboard__row > div:active {
+    background: #2a2a2a;
+    color: #aaa;
+    position: relative;
+    top: 0.2em;
+    box-shadow: 0 0 0 0.05em black;
+}
+
+.key--w3 {
+    width: 4em;
+}
+
+.key--w4 {
+    width: 3em;
+}
+
+.key--w5 {
+    width: 4em;
+}
+
+.key--w6 {
+    width: 4em;
+}
+
+.key--space {
+    width: 17em;
+}
+
+.key--double > * {
+    padding-top: 0.1em;
+}
+
+.key--letter {
+    line-height: 2.8em;
+}
+
+.key--bottom-left > * {
+    position: absolute;
+    text-align: left;
+    bottom: 0.4em;
+    left: 0.4em;
+}
+
+.key--bottom-right > * {
+    position: absolute;
+    text-align: right;
+    bottom: 0.4em;
+    right: 0.4em;
+}
+
+
+
+.key--word > * {
+    font-size: 0.8em;
+}
+
+.key--arrow--tall > *,
+.key--arrow > * {
+    font-size: 0.5em;
+    line-height: 3em;
+}
+
+.key--arrow {
+    height: 1.8em;
+    margin-top: 1.7em;
+    line-height: 0.5em;
+}
+
+.key--arrow--tall > * {
+    padding-top: 0.2em;
+}
+
+.keyboard > .keyboard__row {
+    text-align: center;
+} 
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  
+}
+
+/* The popup chat - hidden by default */
+./*chat-popup {
+  display: none;
+  }*/
+       </style>
+       <style>
+          #modalContainer {
+  background-color:rgba(0, 0, 0, 0.3);
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  z-index:10000;
+  background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
+}
+
+#alertBox {
+  position:relative;
+  width:400px;
+  padding: 15px;
+  min-height:50px;
+  margin-top:50px;
+font-family: Arial, Helvetica, sans-serif;
+  border:3px solid #357EBD;
+  background-color:#fff;
+  background-repeat:no-repeat;
+  background-position:20px 30px;
+  text-align: center;
+  color:  #000000;
+   font:1.3em verdana,arial;
+
+
+}
+
+#modalContainer > #alertBox {
+  position:fixed;
+}
+
+#alertBox h1 {
+  margin:0;
+  font:bold 0.9em verdana,arial;
+  background-color:#3073BB;
+  color:#FFF;
+  border-bottom:1px solid #000;
+  padding:2px 0 2px 5px;
+}
+
+#alertBox p {
+  font:0.9em verdana,arial;
+  /*height:100px;
+  padding-left:5px;
+  padding: 15px;
+  margin-left:55px;*/
+  font-weight: 600;
+}
+
+#alertBox #closeBtn {
+  display:block;
+  position:relative;
+  margin:5px auto;
+  padding:7px;
+  border:0 none;
+  width:70px;
+  font:0.7em verdana,arial;
+  text-transform:uppercase;
+  text-align:center;
+  color:#FFF;
+  background-color:#357EBD;
+  border-radius: 3px;
+  text-decoration:none;
+}
+
+/* unrelated styles */
+
+#mContainer {
+  position:relative;
+  width:600px;
+  margin:auto;
+  padding:5px;
+  border-top:2px solid #000;
+  border-bottom:2px solid #000;
+  font:0.7em verdana,arial;
+}
+
+h1,h2 {
+  margin:0;
+  padding:4px;
+  font:bold 1.5em verdana;
+  /*border-bottom:1px solid #000;*/
+}
+
+code {
+  font-size:1.2em;
+  color:#069;
+}
+
+#credits {
+  position:relative;
+  margin:25px auto 0px auto;
+  width:350px; 
+  font:0.7em verdana;
+  border-top:1px solid #000;
+  border-bottom:1px solid #000;
+  height:90px;
+  padding-top:4px;
+}
+
+#credits img {
+  float:left;
+  margin:5px 10px 5px 0px;
+  border:1px solid #000000;
+  width:80px;
+  height:79px;
+}
+
+.important {
+  background-color:#F5FCC8;
+  padding:2px;
+}
+
+code span {
+  color:green;
+}
+
+       </style>
+
+
+
+
+
+
+ <div style="text-align: center" >
+    <h2 class="heading"><u>Beginner  &nbsp;Typing &nbsp; Practise  &nbsp;Test &nbsp;</u></h2>
+   
+      <div class="container"> 
+   
+      <div class="header"> 
+      <div class="wpm"> 
+        <div class="header_text">Gross WPM</div> 
+        <div class="curr_wpm">100</div> 
+      </div> 
+      <div class="nwpm"> 
+        <div class="header_text">Net WPM</div> 
+        <div class="curr_nwpm">100</div> 
+      </div> 
+      <div class="cpm"> 
+        <div class="header_text">CPM</div> 
+        <div class="curr_cpm">100</div> 
+      </div> 
+      <div class="add"> 
+        <div class="header_text">CPM</div> 
+        <div class="curr_add">100</div> 
+      </div> 
+      <div class="errors"> 
+        <div class="header_text">Total Mistakes</div> 
+        <div class="curr_errors">0</div> 
+      </div> 
+      
+      <div class="accuracy"> 
+        <div class="header_text"> Accuracy</div> 
+        <div class="curr_accuracy">100 %</div> 
+      </div> 
+    </div> 
+  
+     <div class="textbox">
+
+    <div class="quote"> <p>
+       </p>
+    </div>
+
+ 
+    <textarea class="input_area"
+      placeholder="start typing here..."
+      oninput="processCurrentText()"
+      onfocus="startGame()" cols="40"> 
+    </textarea> 
+    <div class="row3">
+      <div class="form-group" style="margin: 10px 0px 0px 8px;">
+      <!-- <button type="submit" class="header_text" style="width: 100px; height: 55px; background-color: #d6f5f5; font-weight: 600;
+       border-radius: 10px;">Time</button> -->
+       <div class="timer"  style="margin: 10px 0px 0px 16px;"> 
+        <div class="header_text">Time</div> 
+        <div class="curr_time">00</div> 
+
+      </div> 
+      </div>
+
+      <div class="form-group" style="margin: 10px 0px 0px 8px;">
+
+      <button type="submit" class="submit" onclick="startStop()"style="width: 100px; height: 55px; background-color: #d6f5f5; font-weight: 600;border-radius: 10px;">Submit</button>
+      </div>
+      
+     
+      <div class="form-group" style="margin: 10px 0px 0px 8px;">
+      <button type="submit" class="" id="myBtn" style="width: 100px; height: 55px; background-color: #d6f5f5; font-weight: 600;
+      border-radius: 10px;">Notice</button>
+      </div>
+       <div class="restart_btn "onclick="resetValues()" style="margin: 10px 0px 0px 8px;">
+      <button type="submit" class="" style="width: 100px; height: 55px; background-color: #d6f5f5; font-weight: 600;
+      border-radius: 10px;">Practise Again</button>
+      </div>
+
+
+  </div>
+   
+  </div> 
+  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <!-- <h4>Notice :</h4> -->
+    <table>
+      <tr>
+        <!-- <th>Sr No</th> -->
+        <th style="font-size: 23px;">Notice:</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td> The required qualifying speed for typing is 25 words per minute in Hindi or 30 words per
+      minute in English for both the cases, i.e. the test on manual typewriter or on PC. Candidates
+      are required to attempt either in English or in Hindi.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>The duration of test will be TEN (60) minutes. If a Candidate does not qualify in above
+          mentioned typing speed, then he/she will be considered unsuccessful in Typing Skill Test</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>
+          The transcripts of those candidates who do not type out 300 words / 1500 strokes in English or
+          250 words / 1250 strokes in Hindi in the prescribed time will not be evaluated.
+        </td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Candidates must start typing from the starting of the question paper and must complete the
+            whole paper. If any candidate finishes the paper before the allotted time, he/she should restart
+            the same passage and continue typing until expiry of the time.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Such Physically Handicapped candidates who are not able to type will have to produce
+            necessary disability certificate in the format available on website of this RRB
+            (www.rrbbilaspur.gov.in)</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>Tips:</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Try to not look at the keyboard while practicing</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td> Know the finger positions.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td> Use the Shift keys</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Be Patient.</td>
+      </tr>
+    </table>
+<br>
+
+
+
+
+
+    
+    <div style="padding: 5px; " id="circle" ><span style="margin-left: 30px;">Red&nbsp;Colour&nbsp;Denote&nbsp;Wrong&nbsp;Word&nbsp;</span></div>
+    <div style="margin-top: 10px; " id="circle1"><p style="margin-left: 33px;">Green&nbsp;Colour&nbsp;Denote&nbsp;Correct&nbsp;Word&nbsp;</p></div>
+    <!-- <div style="margin-top: 10px; margin-left: 10px" id="circle2"></div> -->
+
+  </div>
+</div>
+  <div class="keyboard" style="" >
+  <div class="keyboard__row keyboard__row--h1">
+    
+  </div>
+  <div class="keyboard__row">
+    <div class="key--double" data-key="192">
+      <div>~</div>
+      <div>`</div>
+    </div>
+    <div class="key--double" data-key="49">
+      <div>!</div>
+      <div>1</div>
+    </div>
+    <div class="key--double" data-key="50">
+      <div>@</div>
+      <div>2</div>
+    </div>
+    <div class="key--double" data-key="51">
+      <div>#</div>
+      <div>3</div>
+    </div>
+    <div class="key--double" data-key="52">
+      <div>$</div>
+      <div>4</div>
+    </div>
+    <div class="key--double" data-key="53">
+      <div>%</div>
+      <div>5</div>
+    </div>
+    <div class="key--double" data-key="54">
+      <div>^</div>
+      <div>6</div>
+    </div>
+    <div class="key--double" data-key="55">
+      <div>&</div>
+      <div>7</div>
+    </div>
+    <div class="key--double" data-key="56">
+      <div>*</div>
+      <div>8</div>
+    </div>
+    <div class="key--double" data-key="57">
+      <div>(</div>
+      <div>9</div>
+    </div>
+    <div class="key--double" data-key="48">
+      <div>)</div>
+      <div>0</div>
+    </div>
+    <div class="key--double" data-key="189">
+      <div>_</div>
+      <div>-</div>
+    </div>
+    <div class="key--double" data-key="187">
+      <div>+</div>
+      <div>=</div>
+    </div>
+    <div class="key--bottom-right key--word key--w4" data-key="8" style="background-color: darkgray;">
+      <span>back</span>
+    </div>
+  </div>
+  <div class="keyboard__row">
+    <div class="key--bottom-left key--word key--w4" data-key="9" style="background-color: darkgray;">
+      <span>tab</span>
+    </div>
+    <div class="key--letter" data-char="Q">Q</div>
+    <div class="key--letter" data-char="W">W</div>
+    <div class="key--letter" data-char="E">E</div>
+    <div class="key--letter" data-char="R">R</div>
+    <div class="key--letter" data-char="T">T</div>
+    <div class="key--letter" data-char="Y">Y</div>
+    <div class="key--letter" data-char="U">U</div>
+    <div class="key--letter" data-char="I">I</div>
+    <div class="key--letter" data-char="O">O</div>
+    <div class="key--letter" data-char="P">P</div>
+    <div class="key--double" data-key="219" data-char="{[">
+      <div>{</div>
+      <div>[</div>
+    </div>
+    <div class="key--double" data-key="221" data-char="}]">
+      <div>}</div>
+      <div>]</div>
+    </div>
+    <div class="key--double" data-key="220" data-char="|\">
+      <div>|</div>
+      <div>\</div>
+    </div>
+  </div>
+  <div class="keyboard__row">
+    <div class="key--bottom-left key--word key--w5" data-key="20" style="background-color: darkgray;">
+      <span>caps lock</span>
+    </div>
+    <div class="key--letter" data-char="A">A</div>
+    <div class="key--letter" data-char="S">S</div>
+    <div class="key--letter" data-char="D">D</div>
+    <div class="key--letter" data-char="F">F</div>
+    <div class="key--letter" data-char="G">G</div>
+    <div class="key--letter" data-char="H">H</div>
+    <div class="key--letter" data-char="J">J</div>
+    <div class="key--letter" data-char="K">K</div>
+    <div class="key--letter" data-char="L">L</div>
+    <div class="key--double" data-key="186">
+      <div>:</div>
+      <div>;</div>
+    </div>
+    <div class="key--double" data-key="222">
+      <div>"</div>
+      <div>'</div>
+    </div>
+    <div class="key--bottom-right key--word key--w5" data-key="13" style="background-color: darkgray;">
+      <span>Enter</span>
+    </div>
+  </div>
+  <div class="keyboard__row">
+    <div class="key--bottom-left key--word key--w6" data-key="16" style="background-color: darkgray;">
+      <span>shift</span>
+    </div>
+    <div class="key--letter" data-char="Z">Z</div>
+    <div class="key--letter" data-char="X">X</div>
+    <div class="key--letter" data-char="C">C</div>
+    <div class="key--letter" data-char="V">V</div>
+    <div class="key--letter" data-char="B">B</div>
+    <div class="key--letter" data-char="N">N</div>
+    <div class="key--letter" data-char="M">M</div>
+    <div class="key--double" data-key="188">
+      <div>&lt;</div>
+      <div>,</div>
+    </div>
+    <div class="key--double" data-key="190">
+      <div>&gt;</div>
+      <div>.</div>
+    </div>
+    <div class="key--double" data-key="191">
+      <div>?</div>
+      <div>/</div>
+    </div>
+    <div class="key--bottom-right key--word key--w6" data-key="16-R" style="background-color: darkgray;">
+      <span>shift</span>
+    </div>
+  </div>
+  <div class="keyboard__row keyboard__row--h3">
+    
+    <div class="key--bottom-left key--word key--w1" data-key="17" style="background-color: darkgray;">
+      <span>control</span>
+    </div>
+    <div class="key--bottom-left key--word key--w1" data-key="18" style="background-color: darkgray;">
+      <span>alt</span>
+    </div>
+    
+    <div class="key--double key--right key--space" data-key="32" data-char=" ">
+      &nbsp;
+    </div>
+    
+    <div class="key--bottom-left key--word key--w1" data-key="18-R" style="background-color: darkgray;">
+      <span>alt</span>
+    </div>
+    <div class="key--bottom-left key--word key--w1" data-key="17" style="background-color: darkgray;">
+      <span>control</span>
+    </div>
+   
+    </div>
+  </div>
+</div>
+</div>
+  <!-- link the JavaScript file here -->
+  <script >let TIME_LIMIT = 0; 
+  
+// define quotes to be used 
+let quotes_array = [ 
+  "Push yourself, because no one else is going to do it for you Failure is the condiment that gives success its flavor Wake up with determination. Go to bed with satisfaction.Failure is the condiment that gives success its flavor.", 
+  // "", 
+  // "It's going to be hard, but hard does not mean impossible.", 
+  // "Learning never exhausts the mind.", 
+  // "The only way to do great work is to love what you do."
+]; 
+  
+// selecting required elements 
+let timer_text = document.querySelector(".curr_time"); 
+let accuracy_text = document.querySelector(".curr_accuracy"); 
+let error_text = document.querySelector(".curr_errors"); 
+let cpm_text = document.querySelector(".curr_cpm"); 
+let wpm_text = document.querySelector(".curr_wpm"); 
+let nwpm_text = document.querySelector(".curr_nwpm"); 
+let add_text =document.querySelector(".curr_add");
+
+let quote_text = document.querySelector(".quote"); 
+let input_area = document.querySelector(".input_area"); 
+let restart_btn = document.querySelector(".restart_btn"); 
+let cpm_group = document.querySelector(".cpm"); 
+let wpm_group = document.querySelector(".wpm"); 
+
+let nwpm_group = document.querySelector(".nwpm"); 
+
+let error_group = document.querySelector(".errors"); 
+let accuracy_group = document.querySelector(".accuracy"); 
+  
+let timeLeft = TIME_LIMIT; 
+let timeElapsed = 0; 
+let total_errors = 0; 
+let errors = 0; 
+let accuracy = 0; 
+let characterTyped = 0; 
+let current_quote = ""; 
+let quoteNo = 0; 
+let timer = null; 
+let add=null;
+let time=0;
+
+
+function updateQuote() { 
+  quote_text.textContent = null; 
+  current_quote = quotes_array[quoteNo]; 
+  
+  // separate each character and make an element  
+  // out of each of them to individually style them 
+  current_quote.split('').forEach(char => { 
+    const charSpan = document.createElement('span') 
+    charSpan.innerText = char 
+    quote_text.appendChild(charSpan) 
+  }) 
+  
+  // roll over to the first quote 
+  if (quoteNo < quotes_array.length - 1) 
+    quoteNo++; 
+  else
+    quoteNo = 0; 
+} 
+
+
+
+function startGame() { 
+  
+  resetValues(); 
+  updateQuote(); 
+
+  
+  // restart();
+  
+   // disable the input area 
+  
+  
+  // clear old and start a new timer 
+  clearInterval(timer); 
+  timer = setInterval(updateTimer, 1000);
+// restart_btn.style.display = ""; 
+//   clearInterval(timer);
+} 
+  
+  function restart()
+  {
+    // input_area.disabled = true; 
+  
+  // show finishing text 
+  // quote_text.textContent = "Click on restart to start a Practise Again game."; 
+  
+  // display restart button 
+  restart_btn.style.display = ""; 
+  clearInterval(timer);
+  
+  }
+
+  function submit()
+  {
+    submit.style.display = ""; 
+  clearInterval(timer);
+  clearTimeout(timer);
+  }
+function resetValues() { 
+  timeLeft = TIME_LIMIT; 
+  timeElapsed = 0; 
+  errors = 0; 
+  total_errors = 0; 
+  accuracy = 0; 
+  characterTyped = 0; 
+  quoteNo = 0; 
+  input_area.disabled = false; 
+  
+  input_area.value = ""; 
+  quote_text.textContent = 'Click on the area below to start the game.'; 
+  accuracy_text.textContent = 100; 
+  // timer_text.textContent = timeLeft + 's'; 
+  error_text.textContent = 0; 
+  add_text.textContent="none";
+  restart_btn.style.display = "none"; 
+  cpm_group.style.display = "none"; 
+  wpm_group.style.display = "none"; 
+  nwpm_group.style.display = "none"; 
+
+  accuracy_group.style.display = "none";
+  error_group.style.display = "none";
+restart();
+
+
+// submit.style.display = "block"; 
+
+} 
+
+function updateTimer() { 
+  if (timeLeft > -1) { 
+    // decrease the current time left 
+    timeLeft++; 
+  
+    // increase the time elapsed 
+    timeElapsed++; 
+  
+    // update the timer text 
+    timer_text.textContent = timeLeft;
+     // time = timer_text.textContent;
+     time = timer_text.textContent;
+  } 
+  
+  else { 
+    // finish the game 
+    finishGame(); 
+
+   
+  } 
+} 
+
+function processCurrentText() { 
+  
+  // get current input text and split it 
+  curr_input = input_area.value; 
+  curr_input_array = curr_input.split(''); 
+  
+  // increment total characters typed 
+  characterTyped++; 
+  
+  errors = 0; 
+  
+  quoteSpanArray = quote_text.querySelectorAll('span'); 
+  quoteSpanArray.forEach((char, index) => { 
+    let typedChar = curr_input_array[index] 
+  
+    // character not currently typed 
+    if (typedChar == null) { 
+      char.classList.remove('correct_char'); 
+      char.classList.remove('incorrect_char'); 
+  
+      // correct character 
+    } else if (typedChar === char.innerText) { 
+      char.classList.add('correct_char'); 
+      char.classList.remove('incorrect_char'); 
+  
+      // incorrect character 
+    } else { 
+      char.classList.add('incorrect_char'); 
+      char.classList.remove('correct_char'); 
+  
+      // increment number of errors 
+      errors++; 
+    } 
+  }); 
+  
+  // display the number of errors 
+  error_text.textContent = total_errors + errors; 
+  
+  // update accuracy text 
+  let correctCharacters = (characterTyped - (total_errors + errors)); 
+  let accuracyVal = ((correctCharacters / characterTyped) * 100); 
+  accuracy_text.textContent = Math.round(accuracyVal); 
+  
+  // if current text is completely typed 
+  // irrespective of errors 
+  if (curr_input.length == current_quote.length) { 
+    updateQuote(); 
+  
+    // update total errors 
+    total_errors += errors; 
+  
+    // clear the input area 
+    input_area.value = ""; 
+  }
+  add =Math.floor((time/60));
+  cpm = Math.round(((characterTyped / timeElapsed) * 60)); 
+  wpm = Math.round((((characterTyped / 5) / timeElapsed) * 60)); 
+  nwpm = Math.round((((wpm- error_text.textContent) / timeElapsed) * 60)); 
+
+
+  
+  // update cpm and wpm text 
+  add_text.textContent = add;
+  cpm_text.textContent = cpm; 
+  wpm_text.textContent = wpm; 
+  nwpm_text.textContent = nwpm;  
+  submit.style.display = ""; 
+  
+  
+} 
+
+
+
+function finishGame() { 
+  // stop the timer 
+  // clearInterval(timer); 
+  
+ input_area.disabled = true; 
+  
+  // show finishing text 
+  quote_text.textContent = "Click on restart to start a Practise Again game."; 
+  
+  // display restart button 
+  restart_btn.style.display = ""; 
+  clearInterval(timer);
+  
+
+  // calculate cpm and wpm 
+  
+
+  // accuracy_text.textContent = accuracy;
+  // error_text.textContent = error;
+  
+  // display the cpm and wpm 
+  cpm_group.style.display = "none"; 
+  wpm_group.style.display = "none"; 
+  nwpm_group.style.display = "none"; 
+
+  accuracy_group.style.display = "none";
+  error_group.style.display = "none";
+  timer_text.textContent.style.display ="none";
+  add_text.textContent.style.display="none";
+
+} 
+
+
+function startStop() {
+    
+    {
+alert("<label style=color:green>Gross speed is = " + wpm_text.textContent + " WPM</label>"+
+       "<br><label style=color:green>Net speed is = " +  nwpm_text.textContent + "WPM</label>"+
+      "<br> CPM is = " +  cpm_text.textContent +
+      " CPM <br> <label style=color:red>Total mistakes is = " + error_text.textContent +"</label>"+
+      " <br>Accuracy is =" + accuracy_text.textContent+"<br>Total Time is ="+add_text.textContent+ "min " 
+       +time+ "sec" );
+
+}
+clearInterval(timer);
+}
+
+
+
+ </script>
+  <script >
+    function getKey (e) {
+            // var location = e.location;
+            // var selector;
+            if (location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
+                // selector = ['[data-key="' + e.keyCode + '-R"]']
+            } else {
+                var code = e.keyCode || e.which;
+                selector = [
+                    '[data-key="' + code + '"]',
+                    '[data-char*="' + encodeURIComponent(String.fromCharCode(code)) + '"]'
+                ].join(',');
+            }
+            return document.querySelector(selector);
+        }
+
+        
+        var h1 = document.querySelector('h1');
+        // var originalQueue = h1.innerHTML;
+        // var queue = h1.innerHTML;
+
+        function next () {
+           
+            if (queue.length) {
+                setTimeout(next, Math.random() * 200 + 50);
+            }
+        }
+
+        // h1.innerHTML = "&nbsp;";
+        // setTimeout(next, 500);
+
+        document.body.addEventListener('keydown', function (e) {
+            var key = getKey(e);
+            if (!key) {
+                // return console.warn('No key for', e.keyCode);
+            }
+
+            key.setAttribute('data-pressed', 'on');
+        });
+
+        document.body.addEventListener('keyup', function (e) {
+            var key = getKey(e);
+            key && key.removeAttribute('data-pressed');
+        });
+
+       
+        // size();
+function getKey (e) {
+            // var location = e.location;
+            // var selector;
+            if (location === KeyboardEvent.DOM_KEY_LOCATION_RIGHT) {
+                // selector = ['[data-key="' + e.keyCode + '-R"]']
+            } else {
+                var code = e.keyCode || e.which;
+                selector = [
+                    '[data-key="' + code + '"]',
+                    '[data-char*="' + encodeURIComponent(String.fromCharCode(code)) + '"]'
+                ].join(',');
+            }
+            return document.querySelector(selector);
+        }
+
+    
+
+        var h1 = document.querySelector('h1');
+        
+        function next () {
+           
+            if (queue.length) {
+                setTimeout(next, Math.random() * 200 + 50);
+            }
+        }
+
+
+        document.body.addEventListener('keydown', function (e) {
+            var key = getKey(e);
+            if (!key) {
+                // return console.warn('No key for', e.keyCode);
+            }
+
+            key.setAttribute('data-pressed', 'on');
+        });
+
+        document.body.addEventListener('keyup', function (e) {
+            var key = getKey(e);
+            key && key.removeAttribute('data-pressed');
+        });
+
+        
+
+  </script>
+ <script >
+   var ALERT_TITLE = "Your Typing Result";
+var ALERT_BUTTON_TEXT = "Ok";
+
+if(document.getElementById) {
+  window.alert = function(txt) {
+    createCustomAlert(txt);
+  }
+}
+
+function createCustomAlert(txt) {
+  d = document;
+
+  if(d.getElementById("modalContainer")) return;
+
+  mObj = d.getElementsByTagName("body")[0].appendChild(d.createElement("div"));
+  mObj.id = "modalContainer";
+  // mObj.style.height = d.documentElement.scrollHeight + "px";
+  
+  alertObj = mObj.appendChild(d.createElement("div"));
+  alertObj.id = "alertBox";
+  if(d.all && !window.opera) alertObj.style.top = document.documentElement.scrollTop + "px";
+  alertObj.style.left = (d.documentElement.scrollWidth - alertObj.offsetWidth)/2 + "px";
+  alertObj.style.visiblity="visible";
+
+  h1 = alertObj.appendChild(d.createElement("h1"));
+  h1.appendChild(d.createTextNode(ALERT_TITLE));
+
+  msg = alertObj.appendChild(d.createElement("p"));
+  //msg.appendChild(d.createTextNode(txt));
+  msg.innerHTML = txt;
+
+  btn = alertObj.appendChild(d.createElement("a"));
+  btn.id = "closeBtn";
+  btn.appendChild(d.createTextNode(ALERT_BUTTON_TEXT));
+  btn.href = "#";
+  btn.focus();
+  btn.onclick = function() { removeCustomAlert();return false; }
+
+  alertObj.style.display = "block";
+  
+}
+
+function removeCustomAlert() {
+  document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
+}
+
+
+  var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+
+ </script>
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{{ url('/js/scripts.js') }}"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+       
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+         <script src="{{ url('public/js/a.js') }}"></script>
+
+        <script src="{{ url('chartJs/datatables-demo.js') }}"></script>
+
