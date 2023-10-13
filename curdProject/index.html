@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="Description" content="Enter your description here" />
+        <title>Employee data</title>
+        <link rel="stylesheet" href="style.css">
+        
+    </head>
+    <body>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Employee Data </h1>
+                </div>
+                <div class="col-lg-4"> 
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="form">
+                                <fieldset>
+                                    <input type="hidden" name="id" id="id">
+                                    <lable > Name:</lable>
+                                    <input type="text" class="form-control" name="name" id="name" maxlength="30" size="50" required=""></br>
+                                 
+                                    <lable > Address:</lable>
+                                    <input type="text" class="form-control" name="address" id="address" maxlength="30" size="50" required=""></br>
+                                  
+                                    <lable > Email:</lable>
+                                    <input type="text" class="form-control" name="email" id="email" maxlength="30" size="50" required=""></br>
+                                  
+                                    <lable > Designation:</lable>
+                                    <input type="text" class="form-control" name="designation" id="designation" maxlength="30" size="50" required=""></br>
+                                 
+                                    <lable > Gender:</lable>
+                                    <input type="radio" class="form-control" name="male" maxlength="30" size="50">Male
+                                    <input type="radio" class="form-control" name="female" maxlength="30" size="50">Female
+                                    <input type="radio" class="form-control" name="other" maxlength="30" size="50">Other
+                                    </br>
+                                    <button class="btn btn-sm btn-primary" type="button" onclick="save()">Save</button>
+                                    <button class="btn btn-sm btn-primary" type="button" onclick="clearData()">Reset</button>
+                                </fieldset>   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table table-strips" id="datatable">
+                        <thead>
+                            <tr>
+                            <th>Sr no:</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Designation</th>
+                            <th>Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table"></tbody>
+                    </table>    
+                </div>
+            </div>
+        </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+       <script src="alldata.js"></script>
+       <script src="save.js"></script>
+       <script src="find.js"></script>
+       <script src="remove.js"></script>
+       <!-- <script>allData() </script>      -->
+       <script>
+                function clearData()
+                {
+                    document.getElementById('form').reset()
+                    document.getElementById('id').value=""
+                }
+        </script>
+    </body>
+</html>
